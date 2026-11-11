@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ESTATELY | Tamil Nadu Real Estate</title>
+<style>
+:root {
+    --dark:#173c32;
+    --green:#a5c99a;
+    --gold:#c69a58;
+    --light:#f5f7f3;
+    --white:#fff;
+    --muted:#68766f;
+}
+* {
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',Arial,sans-serif;
+}
+html { scroll-behavior:smooth; }
+body { background:var(--light); color:#24352e; }
+button,input,select,textarea { font:inherit; }
+button { cursor:pointer; }
+section { padding:75px 7%; scroll-margin-top:85px; }
+header {
+    background:white;
+    padding:17px 7%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    position:sticky;
+    top:0;
+    z-index:50;
+    box-shadow:0 3px 15px #00000010;
+}
+.logo {
+    font-size:27px;
+    font-weight:900;
+    color:var(--dark);
+    letter-spacing:2px;
+}
+.logo span { color:var(--gold); }
+nav {
+    display:flex;
+    gap:22px;
+    align-items:center;
+}
+nav a {
+    color:#34443e;
+    text-decoration:none;
+    font-size:14px;
+    font-weight:650;
+}
+nav a:hover { color:var(--gold); }
+.menu {
+    display:none;
+    border:0;
+    background:none;
+    font-size:27px;
+}
+.hero {
+    min-height:570px;
+    display:flex;
+    align-items:center;
+    padding:70px 8%;
+    color:white;
+    background:
+    linear-gradient(90deg,#102c26ed,#102c2670),
+    url('drawing hall.jpg')
+    center/cover;
+}
+.hero-content { max-width:680px; }
+.hero h1 {
+    font-size:clamp(40px,6vw,68px);
+    line-height:1.12;
+    margin-bottom:20px;
+}
+.hero h1 span { color:var(--green); }
+.hero p {
+    font-size:17px;
+    line-height:1.8;
+    margin-bottom:28px;
+    color:#e7eee9;
+}
+.btn {
+    display:inline-block;
+    border:0;
+    border-radius:5px;
+    padding:13px 22px;
+    background:var(--dark);
+    color:white;
+    text-decoration:none;
+    font-weight:650;
+}
+.btn:hover { background:#315d4c; }
+.btn-green { background:var(--green); color:var(--dark); }
+.btn-gold { background:var(--gold); color:white; }
+.search-wrap {
+    width:88%;
+    margin:-45px auto 20px;
+    position:relative;
+    z-index:5;
+}
+.search-panel {
+    background:white;
+    border-radius:12px;
+    padding:28px;
+    box-shadow:0 12px 35px #00000015;
+}
+.search-panel h2 { color:var(--dark); margin-bottom:7px; }
+.search-panel p { color:var(--muted); margin-bottom:20px; }
+.search-grid {
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:13px;
+}
+input,select,textarea {
+    width:100%;
+    padding:13px;
+    border:1px solid #dce3dd;
+    background:white;
+    border-radius:5px;
+    outline:none;
+    color:#24352e;
+}
+input:focus,select:focus,textarea:focus {
+    border-color:#759b7f;
+    box-shadow:0 0 0 2px #a5c99a35;
+}
+.search-grid button { min-height:46px; }
+.heading {
+    text-align:center;
+    margin-bottom:38px;
+}
+.heading h2 {
+    font-size:35px;
+    color:var(--dark);
+    margin-bottom:10px;
+}
+.heading p { color:var(--muted); }
+.categories {
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:22px;
+}
+
+.category {
+    background:white;
+    border:1px solid #e9eee9;
+    padding:30px 20px;
+    border-radius:12px;
+    text-align:center;
+    transition:.25s;
+    cursor:pointer;
+}
+.category:hover {
+    transform:translateY(-6px);
+    background:#edf4eb;
+}
+.category .emoji { font-size:42px; margin-bottom:12px; }
+.category h3 { color:var(--dark); margin-bottom:8px; }
+.category p { color:var(--muted); font-size:14px; }
+.property-heading {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    flex-wrap:wrap;
+    margin-bottom:25px;
+}
+.property-heading h2 {
+    color:var(--dark);
+    font-size:30px;
+}
+.property-grid {
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:24px;
+}
+.property-card {
+    background:white;
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:0 5px 20px #00000009;
+    transition:.25s;
+}
+.property-card:hover {
+    transform:translateY(-6px);
+    box-shadow:0 12px 25px #00000014;
+}
+.property-image {
+    height:220px;
+    position:relative;
+}
+.property-image img {
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+.tag {
+    position:absolute;
+    top:14px;
+    left:14px;
+    background:var(--green);
+    color:var(--dark);
+    font-size:12px;
+    padding:7px 12px;
+    border-radius:4px;
+    font-weight:bold;
+}
+.heart {
+    position:absolute;
+    right:14px;
+    top:14px;
+    border:0;
+    background:white;
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    font-size:20px;
+    color:#555;
+}
+.heart.active { color:#d63355; }
+.property-info { padding:20px; }
+.property-info h3 { margin-bottom:9px; color:var(--dark); }
+.location { color:var(--muted); font-size:14px; margin-bottom:15px; }
+.property-meta {
+    display:flex;
+    justify-content:space-between;
+    gap:5px;
+    padding:13px 0;
+    border-top:1px solid #eee;
+    border-bottom:1px solid #eee;
+    font-size:12px;
+    color:#53635b;
+}
+.price {
+    color:#a17b42;
+    font-size:22px;
+    font-weight:800;
+    margin:15px 0;
+}
+.card-actions {
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+}
+.card-actions button {
+    border:0;
+    padding:11px 5px;
+    border-radius:5px;
+    background:var(--dark);
+    color:white;
+    font-size:13px;
+}
+.card-actions .compare-btn {
+    background:#e9efe9;
+    color:var(--dark);
+}
+.empty {
+    background:white;
+    padding:50px 15px;
+    text-align:center;
+    border-radius:10px;
+    grid-column:1/-1;
+}
+.banner {
+    background:linear-gradient(120deg,#173c32,#315e4d);
+    color:white;
+    padding:60px 25px;
+    border-radius:15px;
+    text-align:center;
+}
+.banner h2 { font-size:35px; margin-bottom:12px; }
+.banner p { color:#dce9df; margin-bottom:23px; }
+.about-grid {
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:45px;
+    align-items:center;
+}
+.about-grid img {
+    width:100%;
+    height:380px;
+    object-fit:cover;
+    border-radius:12px;
+}
+.about-grid h2 {
+    color:var(--dark);
+    font-size:35px;
+    margin-bottom:17px;
+}
+.about-grid p {
+    color:var(--muted);
+    line-height:1.8;
+    margin-bottom:13px;
+}
+.stats {
+    display:flex;
+    flex-wrap:wrap;
+    gap:30px;
+    margin-top:25px;
+}
+.stats h3 { color:var(--gold); font-size:27px; }
+.tools-section { background:#eaf0e8; }
+.tools-grid {
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:25px;
+}
+.tool-card {
+    background:white;
+    padding:27px;
+    border-radius:12px;
+}
+.tool-card h3 { color:var(--dark); margin-bottom:17px; }
+.tool-card label,.booking-form label { display:block; margin:12px 0 6px; font-size:14px; font-weight:600; }
+.tool-card button { margin-top:15px; width:100%; }
+.result {
+    margin-top:16px;
+    background:#edf4eb;
+    padding:15px;
+    border-radius:6px;
+    font-weight:650;
+    color:var(--dark);
+    line-height:1.7;
+}
+.booking { background:#f4f7f2; }
+.booking-form {
+    max-width:650px;
+    margin:auto;
+    background:white;
+    padding:30px;
+    border-radius:12px;
+    box-shadow:0 5px 20px #00000009;
+}
+.booking-form button { width:100%; margin-top:15px; }
+.contact-grid {
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+.contact-card {
+    background:white;
+    text-align:center;
+    padding:30px 15px;
+    border-radius:10px;
+}
+.contact-card .emoji { font-size:35px; }
+.contact-card h3 { color:var(--dark); margin:12px 0; }
+.contact-card p { color:var(--muted); font-size:14px; }
+footer {
+    background:#102c26;
+    color:white;
+    padding:45px 7% 20px;
+}
+.footer-grid {
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr;
+    gap:30px;
+}
+footer h3 { margin-bottom:15px; }
+footer p { color:#c7d5cb; line-height:1.8; }
+footer a {
+    display:block;
+    text-decoration:none;
+    color:#d7e3db;
+    margin:10px 0;
+}
+footer a:hover { color:var(--gold); }
+.copyright {
+    border-top:1px solid #ffffff25;
+    text-align:center;
+    margin-top:30px;
+    padding-top:20px;
+    color:#aebeb4;
+    font-size:13px;
+}
+.modal {
+    display:none;
+    position:fixed;
+    inset:0;
+    z-index:100;
+    background:#000000aa;
+    align-items:center;
+    justify-content:center;
+    padding:18px;
+}
+.modal-box {
+    background:white;
+    border-radius:12px;
+    padding:25px;
+    max-width:650px;
+    width:100%;
+    max-height:90vh;
+    overflow:auto;
+}
+.modal-top {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:18px;
+}
+.close {
+    border:0;
+    background:none;
+    font-size:28px;
+    cursor:pointer;
+}
+.modal-box img {
+    width:100%;
+    height:240px;
+    object-fit:cover;
+    border-radius:8px;
+    margin-bottom:17px;
+}
+.modal-box p { margin:10px 0; color:#53635b; }
+.compare-table {
+    width:100%;
+    border-collapse:collapse;
+    font-size:13px;
+}
+.compare-table th,.compare-table td {
+    border:1px solid #ddd;
+    padding:10px;
+    text-align:left;
+}
+.compare-table th { background:#edf4eb; }
+@media(max-width:950px) {
+    .property-grid { grid-template-columns:repeat(2,1fr); }
+    .search-grid { grid-template-columns:repeat(2,1fr); }
+}
+@media(max-width:650px) {
+    header { padding:15px 5%; }
+    .menu { display:block; }
+    nav {
+        display:none;
+        position:absolute;
+        top:65px;
+        left:0;
+        width:100%;
+        background:white;
+        padding:20px;
+        flex-direction:column;
+        align-items:flex-start;
+        box-shadow:0 10px 15px #00000012;
+    }
+    nav.show { display:flex; }
+    .hero { min-height:480px; padding:50px 7%; }
+    .search-wrap { width:92%; }
+    .search-grid,.property-grid,.categories,
+    .contact-grid,.tools-grid,.about-grid,.footer-grid {
+        grid-template-columns:1fr;
+    }
+    section { padding:55px 6%; }
+    .heading h2 { font-size:28px; }
+    .property-heading h2 { font-size:25px; }
+    .about-grid img { height:260px; }
+    .banner h2 { font-size:27px; }
+}
+</style>
+</head>
+<body>
+<header>
+    <a href="#home" style="text-decoration:none">
+        <div class="logo">ESTA<span>TELY.</span></div>
+    </a>
+    <nav id="navbar">
+        <a href="#home">Home</a>
+        <a href="#properties">Properties</a>
+        <a href="#properties" onclick="setPurpose('Buy')">Buy</a>
+        <a href="#properties" onclick="setPurpose('Rent')">Rent</a>
+        <a href="#about">About Us</a>
+        <a href="#contact">Contact</a>
+    </nav>
+    <button class="menu" onclick="toggleMenu()">☰</button>
+</header>
+<div class="hero" id="home">
+    <div class="hero-content">
+        <h1>Find a Place You'll <span>Love.</span></h1>
+        <p>
+            Discover your dream house, apartment, commercial
+            space or land. Explore properties across all
+            38 districts of Tamil Nadu with ESTATELY.
+        </p>
+        <a href="#properties" class="btn btn-green">Explore Properties →</a>
+    </div>
+</div>
+<div class="search-wrap">
+    <div class="search-panel">
+        <h2>Find Your Perfect Property</h2>
+        <p>Search properties across Tamil Nadu.</p>
+        <div class="search-grid">
+            <select id="districtSearch">
+                <option value="">All 38 Districts</option>
+            </select>
+            <select id="citySearch">
+                <option value="">All Cities and Towns</option>
+            </select>
+            <select id="typeSearch">
+                <option value="">All Property Types</option>
+                <option value="House">Independent House</option>
+                <option value="Apartment">Apartment</option>
+                <option value="Villa">Villa</option>
+                <option value="Plot">Residential Plot</option>
+                <option value="Office">Office</option>
+                <option value="Shop">Commercial Shop</option>
+            </select>
+            <select id="purposeSearch">
+                <option value="">Buy / Rent / Lease</option>
+                <option value="Buy">Buy</option>
+                <option value="Rent">Rent</option>
+                <option value="Lease">Lease</option>
+            </select>
+            <input type="text" id="localitySearch"
+                   placeholder="Enter locality (optional)">
+
+            <button class="btn" onclick="searchProperties()">
+                Search Properties
+            </button>
+        </div>
+    </div>
+</div>
+<section id="categories">
+    <div class="heading">
+        <h2>Explore Categories</h2>
+        <p>Find the right property for your needs.</p>
+    </div>
+    <div class="categories">
+        <div class="category" onclick="filterCategory('Residential')">
+            <div class="emoji">🏡</div>
+            <h3>Residential</h3>
+            <p>Independent houses, apartments and villas.</p>
+        </div>
+        <div class="category" onclick="filterCategory('Commercial')">
+            <div class="emoji">🏢</div>
+            <h3>Commercial</h3>
+            <p>Office buildings and business spaces.</p>
+        </div>
+        <div class="category" onclick="filterCategory('Plot')">
+            <div class="emoji">🌳</div>
+            <h3>Land & Plots</h3>
+            <p>Explore land for your future plans.</p>
+        </div>
+    </div>
+</section>
+<section id="properties">
+    <div class="property-heading">
+        <div>
+            <h2>Featured Properties</h2>
+            <p style="color:var(--muted);margin-top:8px">
+                Explore our sample property collection.
+            </p>
+        </div>
+        <button class="btn btn-gold" onclick="showFavourites()">
+            ♥ My Favourites
+        </button>
+    </div>
+    <div id="propertyGrid" class="property-grid"></div>
+</section>
+<section style="padding-top:0">
+    <div class="banner">
+        <h2>Make a Smarter Property Choice</h2>
+        <p>Select properties and compare their prices, areas and locations.</p>
+        <button class="btn btn-green" onclick="showComparison()">
+            Compare Selected Properties
+        </button>
+    </div>
+</section>
+<section id="about">
+    <div class="about-grid">
+        <img
+        src="modern home.jpg"
+        alt="Modern home interior">
+
+        <div>
+            <h2>About ESTATELY</h2>
+            <p>
+                ESTATELY is a modern real estate website concept
+                designed to simplify property discovery throughout
+                Tamil Nadu.
+            </p>
+            <p>
+                Visitors can explore residential properties,
+                commercial spaces and land listings through
+                location-based searching.
+            </p>
+            <p>
+                Our goal is to make property discovery convenient,
+                informative and user-friendly.
+            </p>
+            <div class="stats">
+                <div><h3>38</h3><p>Districts</p></div>
+                <div><h3>6+</h3><p>Property Types</p></div>
+                <div><h3>3</h3><p>Search Purposes</p></div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="tools-section">
+    <div class="heading">
+        <h2>Smart Property Tools</h2>
+        <p>Helpful tools to plan your property purchase.</p>
+    </div>
+    <div class="tools-grid">
+        <div class="tool-card">
+            <h3>🏠 Home Loan EMI Calculator</h3>
+            <label>Loan Amount (₹)</label>
+            <input type="number" id="loanAmount" placeholder="Example: 3000000">
+
+            <label>Annual Interest Rate (%)</label>
+            <input type="number" id="interestRate" value="8.5" step="0.1">
+
+            <label>Loan Duration (Years)</label>
+            <input type="number" id="loanYears" value="20">
+
+            <button class="btn" onclick="calculateEMI()">Calculate EMI</button>
+
+            <div class="result" id="emiResult">
+                Your monthly EMI will appear here.
+            </div>
+        </div>
+        <div class="tool-card">
+            <h3>📊 Property Budget Calculator</h3>
+
+            <label>Your Total Budget (₹)</label>
+            <input type="number" id="budget" placeholder="Example: 5000000">
+
+            <label>Down Payment (₹)</label>
+            <input type="number" id="downPayment" placeholder="Example: 1000000">
+
+            <button class="btn" onclick="calculateBudget()">
+                Calculate Budget
+            </button>
+
+            <div class="result" id="budgetResult">
+                Your estimated required loan will appear here.
+            </div>
+        </div>
+    </div>
+</section>
+<section class="booking" id="booking">
+    <div class="heading">
+        <h2>Book a Property Visit</h2>
+        <p>Send an enquiry to request a property visit.</p>
+    </div>
+    <form class="booking-form" id="bookingForm">
+        <label>Full Name</label>
+        <input type="text" id="customerName"
+               placeholder="Enter your name" required>
+        <label>Email Address</label>
+        <input type="email" id="customerEmail"
+               placeholder="Enter your email" required>
+        <label>Phone Number</label>
+        <input type="tel" id="customerPhone"
+               placeholder="10 digit phone number"
+               pattern="[0-9]{10}" maxlength="10" required>
+
+        <label>Select Property</label>
+        <select id="bookingProperty" required>
+            <option value="">Choose a property</option>
+        </select>
+        <label>Preferred Visit Date</label>
+        <input type="date" id="visitDate" required>
+        <label>Message</label>
+        <textarea id="message" rows="4"
+                  placeholder="Write your enquiry"></textarea>
+
+        <button class="btn" type="submit">Submit Enquiry</button>
+    </form>
+</section>
+<section id="contact">
+    <div class="heading">
+        <h2>Contact Us</h2>
+        <p>We are happy to help with your property enquiries.</p>
+    </div>
+    <div class="contact-grid">
+        <div class="contact-card">
+            <div class="emoji">📍</div>
+            <h3>Address</h3>
+            <p>Coimbatore, Tamil Nadu, India</p>
+        </div>
+        <div class="contact-card">
+            <div class="emoji">📞</div>
+            <h3>Phone</h3>
+            <p>+91 98765 43210</p>
+        </div>
+        <div class="contact-card">
+            <div class="emoji">✉️</div>
+            <h3>Email</h3>
+            <p>contact@estately.com</p>
+        </div>
+    </div>
+</section>
+<footer>
+    <div class="footer-grid">
+        <div>
+            <div class="logo" style="color:white">
+                ESTA<span>TELY.</span>
+            </div>
+            <p style="margin-top:15px">
+                Find Your Space. Build Your Future.
+                Explore properties across Tamil Nadu.
+            </p>
+        </div>
+        <div>
+            <h3>Quick Links</h3>
+            <a href="#home">Home</a>
+            <a href="#properties">Properties</a>
+            <a href="#about">About Us</a>
+            <a href="#booking">Booking</a>
+            <a href="#contact">Contact</a>
+        </div>
+        <div>
+            <h3>Follow Us</h3>
+            <a href="https://instagram.com/" target="_blank">Instagram</a>
+            <a href="https://facebook.com/" target="_blank">Facebook</a>
+            <a href="https://linkedin.com/" target="_blank">LinkedIn</a>
+        </div>
+    </div>
+    <div class="copyright">
+        © 2026 ESTATELY. All Rights Reserved.
+        <br>Web Technology Microproject
+    </div>
+</footer>
+<div class="modal" id="detailsModal">
+    <div class="modal-box">
+        <div class="modal-top">
+            <h2>Property Details</h2>
+            <button class="close" onclick="closeModal('detailsModal')">×</button>
+        </div>
+        <div id="detailsContent"></div>
+    </div>
+</div>
+<div class="modal" id="compareModal">
+    <div class="modal-box">
+        <div class="modal-top">
+            <h2>Compare Properties</h2>
+            <button class="close" onclick="closeModal('compareModal')">×</button>
+        </div>
+        <div id="compareContent"></div>
+    </div>
+</div>
+<script>
+const tamilNaduLocations = {
+"Ariyalur":["Ariyalur","Andimadam","Sendurai","Udayarpalayam","Jayankondam"],
+"Chengalpattu":["Chengalpattu","Cheyyur","Maduranthakam","Pallavaram","Tambaram","Thirukalukundram","Tiruporur","Vandalur"],
+"Chennai":["Adyar","Alandur","Ambattur","Anna Nagar","Aminjikarai","Ayanavaram","Egmore","Guindy","Madhavaram","Madhuravoyal","Mambalam","Mylapore","Perambur","Purasawalkam","Sholinganallur","T Nagar","Tambaram","Thiruvottiyur","Velachery"],
+"Coimbatore":["Aanaimalai","Annur","Coimbatore North","Coimbatore South","Kinathukadavu","Madukkarai","Mettupalayam","Perur","Pollachi","Sulur","Valparai"],
+"Cuddalore":["Cuddalore","Bhuvanagiri","Chidambaram","Kattumannarkoil","Kurinjipadi","Panruti","Srimushnam","Tittakudi","Veppur","Virudhachalam"],
+"Dharmapuri":["Dharmapuri","Harur","Karimangalam","Nallampalli","Palacode","Pappireddipatti","Pennagaram"],
+"Dindigul":["Athoor","Dindigul East","Dindigul West","Guziliamparai","Kodaikanal","Natham","Nilakottai","Oddanchatram","Palani","Vedasandur"],
+"Erode":["Erode","Anthiyur","Bhavani","Gobichettipalayam","Kodumudi","Modakurichi","Nambiyur","Perundurai","Sathyamangalam","Thalavadi"],
+"Kallakurichi":["Kallakurichi","Chinnasalem","Kalvarayan Hills","Sankarapuram","Tirukoilur","Ulundurpet"],
+"Kancheepuram":["Kancheepuram","Kundrathur","Sriperumbudur","Uthiramerur","Walajabad"],
+"Kanniyakumari":["Agastheeswaram","Kalkulam","Killiyoor","Thiruvattar","Thovalai","Vilavancode","Nagercoil","Marthandam","Colachel","Kanyakumari"],
+"Karur":["Karur","Aravakurichi","Kadavur","Krishnarayapuram","Kulithalai","Manmangalam","Pugalur"],
+"Krishnagiri":["Krishnagiri","Anjetty","Bargur","Hosur","Pochampalli","Shoolagiri","Denkanikottai","Uthangarai"],
+"Madurai":["Kallikudi","Madurai East","Madurai North","Madurai South","Madurai West","Melur","Peraiyur","Thirumangalam","Thiruparankundram","Usilampatti","Vadipatti"],
+"Mayiladuthurai":["Mayiladuthurai","Kuthalam","Sirkazhi","Tharangambadi"],
+"Nagapattinam":["Nagapattinam","Kilvelur","Thirukkuvalai","Vedaranyam"],
+"Namakkal":["Namakkal","Kolli Hills","Kumarapalayam","Mohanoor","Paramathi Velur","Rasipuram","Senthamangalam","Tiruchengode"],
+"Nilgiris":["Udhagamandalam","Coonoor","Gudalur","Kotagiri","Kundah","Pandalur"],
+"Perambalur":["Perambalur","Alathur","Kunnam","Veppanthattai"],
+"Pudukkottai":["Pudukkottai","Alangudi","Aranthangi","Avudaiyarkoil","Gandarvakottai","Iluppur","Karambakudi","Kulathur","Manamelkudi","Ponnamaravathi","Thirumayam","Viralimalai"],
+"Ramanathapuram":["Ramanathapuram","Kadaladi","Kamuthi","Kilakarai","Mudukulathur","Paramakudi","Rajasingamangalam","Rameswaram","Tiruvadanai"],
+"Ranipet":["Arakkonam","Arcot","Kalavai","Nemili","Sholinghur","Walajah"],
+"Salem":["Salem","Attur","Edappadi","Gangavalli","Kadayampatti","Mettur","Omalur","Pethanaickenpalayam","Salem South","Salem West","Sankari","Vazhapadi","Yercaud"],
+"Sivaganga":["Sivaganga","Devakottai","Ilayankudi","Kalaiyarkoil","Karaikudi","Manamadurai","Singampunari","Thirupuvanam","Tirupathur"],
+"Tenkasi":["Tenkasi","Alangulam","Kadayanallur","Sankarankovil","Shenkottai","Sivagiri","Thiruvengadam","Veerakeralampudur"],
+"Thanjavur":["Thanjavur","Boothalur","Kumbakonam","Orathanadu","Papanasam","Pattukkottai","Peravurani","Thiruvaiyaru","Thiruvidaimaruthur"],
+"Theni":["Theni","Andipatti","Bodinayakanur","Periyakulam","Uthamapalayam"],
+"Thoothukudi":["Thoothukudi","Eral","Ettayapuram","Kayathar","Kovilpatti","Ottapidaram","Sattankulam","Srivaikundam","Tiruchendur","Vilathikulam"],
+"Tiruchirappalli":["Lalgudi","Manachanallur","Manapparai","Marungapuri","Musiri","Srirangam","Thottiyam","Thuraiyur","Tiruchirappalli East","Tiruchirappalli West","Tiruverumbur"],
+"Tirunelveli":["Tirunelveli","Ambasamudram","Cheranmahadevi","Manur","Nanguneri","Palayamkottai","Radhapuram","Thisayanvilai"],
+"Tirupathur":["Tirupathur","Ambur","Natrampalli","Vaniyambadi"],
+"Tiruppur":["Avinashi","Dharapuram","Kangeyam","Madathukulam","Oothukuli","Palladam","Tiruppur North","Tiruppur South","Udumalaipettai"],
+"Tiruvallur":["Tiruvallur","Avadi","Gummidipoondi","Pallipattu","Ponneri","Poonamallee","R K Pet","Tiruttani","Uthukottai"],
+"Tiruvannamalai":["Tiruvannamalai","Arni","Chengam","Chetpet","Cheyyar","Jamunamarathur","Kalasapakkam","Kilpennathur","Polur","Thandarampattu","Vandavasi","Vembakkam"],
+"Tiruvarur":["Tiruvarur","Kodavasal","Koothanallur","Mannargudi","Nannilam","Needamangalam","Thiruthuraipoondi","Valangaiman"],
+"Vellore":["Vellore","Anaicut","Gudiyatham","K V Kuppam","Katpadi","Pernambut"],
+"Viluppuram":["Viluppuram","Gingee","Kandachipuram","Marakkanam","Melmalaiyanur","Thiruvennainallur","Tindivanam","Vanur","Vikravandi"],
+"Virudhunagar":["Virudhunagar","Aruppukkottai","Kariapatti","Rajapalayam","Sattur","Sivakasi","Srivilliputhur","Tiruchuli","Vembakottai","Watrap"]
+};
+const properties = [
+{
+id:1,name:"Premium Luxury Villa",
+district:"Coimbatore",town:"Coimbatore",
+locality:"Saravanampatti",type:"Villa",
+category:"Residential",purpose:"Buy",
+area:"2400 sq.ft",bedrooms:4,
+price:"₹95 Lakhs",priceValue:9500000,
+image:"white house.jpg"
+},
+{
+id:2,name:"Modern Family Apartment",
+district:"Chennai",town:"Tambaram",
+locality:"Tambaram West",type:"Apartment",
+category:"Residential",purpose:"Rent",
+area:"1200 sq.ft",bedrooms:3,
+price:"₹25,000/month",priceValue:25000,
+image:"interior.jpg"
+},
+{
+id:3,name:"Green Residential Plot",
+district:"Madurai",town:"Madurai",
+locality:"Othakadai",type:"Plot",
+category:"Plot",purpose:"Buy",
+area:"1500 sq.ft",bedrooms:0,
+price:"₹35 Lakhs",priceValue:3500000,
+image:"land.jpg"
+},
+{
+id:4,name:"Commercial Office Space",
+district:"Tiruppur",town:"Tiruppur",
+locality:"Avinashi Road",type:"Office",
+category:"Commercial",purpose:"Rent",
+area:"1800 sq.ft",bedrooms:0,
+price:"₹45,000/month",priceValue:45000,
+image:"office.jpg"
+},
+{
+id:5,name:"Elegant Family House",
+district:"Salem",town:"Salem",
+locality:"Fairlands",type:"House",
+category:"Residential",purpose:"Buy",
+area:"2000 sq.ft",bedrooms:3,
+price:"₹75 Lakhs",priceValue:7500000,
+image:"family house.jpg"
+},
+{
+id:6,name:"Luxury Business Building",
+district:"Chennai",town:"Guindy",
+locality:"Guindy",type:"Office",
+category:"Commercial",purpose:"Buy",
+area:"3000 sq.ft",bedrooms:0,
+price:"₹1.5 Crore",priceValue:15000000,
+image:"office 1.jpg"
+},
+{
+id:7,name:"Hill View Cottage",
+district:"Nilgiris",town:"Coonoor",
+locality:"Coonoor",type:"House",
+category:"Residential",purpose:"Buy",
+area:"1800 sq.ft",bedrooms:3,
+price:"₹85 Lakhs",priceValue:8500000,
+image:"cottage.jpg"
+},
+{
+id:8,name:"City Apartment",
+district:"Madurai",town:"Madurai",
+locality:"KK Nagar",type:"Apartment",
+category:"Residential",purpose:"Rent",
+area:"1000 sq.ft",bedrooms:2,
+price:"₹18,000/month",priceValue:18000,
+image:"hall.jpg"
+},
+{
+id:9,name:"Commercial Shop",
+district:"Erode",town:"Erode",
+locality:"Brough Road",type:"Shop",
+category:"Commercial",purpose:"Lease",
+area:"850 sq.ft",bedrooms:0,
+price:"₹20,000/month",priceValue:20000,
+image:"wadrobe.jpg"
+},
+{
+id:10,name:"Independent Family Villa",
+district:"Tiruchirappalli",town:"Srirangam",
+locality:"Srirangam",type:"Villa",
+category:"Residential",purpose:"Buy",
+area:"2200 sq.ft",bedrooms:4,
+price:"₹90 Lakhs",priceValue:9000000,
+image:"modern.jpg"
+},
+{
+id:11,name:"Residential Plot",
+district:"Salem",town:"Mettur",
+locality:"Mettur",type:"Plot",
+category:"Plot",purpose:"Buy",
+area:"1200 sq.ft",bedrooms:0,
+price:"₹22 Lakhs",priceValue:2200000,
+image:"land 1.jpg"
+},
+{
+id:12,name:"Modern Office",
+district:"Coimbatore",town:"Pollachi",
+locality:"Pollachi Main Road",type:"Office",
+category:"Commercial",purpose:"Rent",
+area:"1400 sq.ft",bedrooms:0,
+price:"₹30,000/month",priceValue:30000,
+image:"coridor.jpg"
+}
+];
+const districtSelect=document.getElementById("districtSearch");
+const citySelect=document.getElementById("citySearch");
+Object.keys(tamilNaduLocations).sort().forEach(district=>{
+    const option=document.createElement("option");
+    option.value=district;
+    option.textContent=district;
+    districtSelect.appendChild(option);
+});
+districtSelect.addEventListener("change",function(){
+    citySelect.innerHTML='<option value="">All Cities and Towns</option>';
+    const towns=tamilNaduLocations[this.value] || [];
+    towns.forEach(town=>{
+        const option=document.createElement("option");
+        option.value=town;
+        option.textContent=town;
+        citySelect.appendChild(option);
+    });
+});
+const grid=document.getElementById("propertyGrid");
+let favourites=JSON.parse(localStorage.getItem("estatelyFavourites") || "[]");
+let comparison=[];
+function displayProperties(list){
+    grid.innerHTML="";
+    if(list.length===0){
+        grid.innerHTML=`
+        <div class="empty">
+            <h2>No Properties Found</h2>
+            <p style="margin-top:10px">Try different search filters.</p>
+        </div>`;
+        return;
+    }
+    list.forEach(p=>{
+        const isFavourite=favourites.includes(p.id);
+        const isCompared=comparison.includes(p.id);
+        const card=document.createElement("div");
+        card.className="property-card";
+        card.innerHTML=`
+        <div class="property-image">
+            <img src="${p.image}" alt="${p.name}" loading="lazy">
+            <span class="tag">${p.purpose}</span>
+            <button class="heart ${isFavourite?'active':''}"
+                onclick="toggleFavourite(${p.id})">
+                ${isFavourite?'♥':'♡'}
+            </button>
+        </div>
+        <div class="property-info">
+            <h3>${p.name}</h3>
+            <p class="location">📍 ${p.locality}, ${p.district}</p>
+            <div class="property-meta">
+                <span>🏠 ${p.type}</span>
+                <span>📐 ${p.area}</span>
+                <span>🛏 ${p.bedrooms || 'N/A'}</span>
+            </div>
+            <div class="price">${p.price}</div>
+            <div class="card-actions">
+                <button onclick="showDetails(${p.id})">View Details</button>
+                <button class="compare-btn"
+                    onclick="toggleCompare(${p.id})">
+                    ${isCompared?'✓ Selected':'Compare'}
+                </button>
+            </div>
+        </div>`;
+        grid.appendChild(card);
+    });
+}
+function searchProperties(){
+    const district=districtSelect.value.toLowerCase();
+    const town=citySelect.value.toLowerCase();
+
+    const locality=document.getElementById("localitySearch")
+        .value.trim().toLowerCase();
+
+    const type=document.getElementById("typeSearch").value;
+    const purpose=document.getElementById("purposeSearch").value;
+    const filtered=properties.filter(p=>{
+
+        return (
+            (!district || p.district.toLowerCase()===district) &&
+            (!town || p.town.toLowerCase()===town) &&
+            (!locality || p.locality.toLowerCase().includes(locality)) &&
+            (!type || p.type===type) &&
+            (!purpose || p.purpose===purpose)
+        );
+    });
+    displayProperties(filtered);
+    document.getElementById("properties")
+        .scrollIntoView({behavior:"smooth"});
+}
+function setPurpose(purpose){
+    document.getElementById("purposeSearch").value=purpose;
+    searchProperties();
+}
+function filterCategory(category){
+
+    const filtered=properties.filter(p=>
+        p.category===category
+    );
+
+    displayProperties(filtered);
+
+    document.getElementById("properties")
+        .scrollIntoView({behavior:"smooth"});
+}
+function toggleFavourite(id){
+    if(favourites.includes(id)){
+        favourites=favourites.filter(x=>x!==id);
+    }else{
+        favourites.push(id);
+    }
+    localStorage.setItem(
+        "estatelyFavourites",
+        JSON.stringify(favourites)
+    );
+    displayProperties(properties);
+}
+function showFavourites()
+{
+    const list=properties.filter(p=>favourites.includes(p.id));
+    displayProperties(list);
+    document.getElementById("properties")
+        .scrollIntoView({behavior:"smooth"});
+}
+function showDetails(id){
+    const p=properties.find(x=>x.id===id);
+    document.getElementById("detailsContent").innerHTML=`
+        <img src="${p.image}" alt="${p.name}">
+        <h2 style="color:var(--dark)">${p.name}</h2>
+        <p>📍 ${p.locality}, ${p.town}, ${p.district}</p>
+        <p><b>Property type:</b> ${p.type}</p>
+        <p><b>Category:</b> ${p.category}</p>
+        <p><b>Purpose:</b> ${p.purpose}</p>
+        <p><b>Area:</b> ${p.area}</p>
+        <p><b>Bedrooms:</b> ${p.bedrooms || "Not applicable"}</p>
+        <h2 class="price">${p.price}</h2>
+        <button class="btn" onclick="selectBooking(${p.id})">
+            Book a Site Visit
+        </button>
+    `;
+    openModal("detailsModal");
+}
+function toggleCompare(id){
+    if(comparison.includes(id)){
+        comparison=comparison.filter(x=>x!==id);
+    }else if(comparison.length<3){
+        comparison.push(id);
+    }else{
+        alert("You can compare a maximum of 3 properties.");
+        return;
+    }
+    displayProperties(properties);
+}
+function showComparison(){
+    const selected=properties.filter(p=>comparison.includes(p.id));
+    if(selected.length<2){
+        alert("Please select at least 2 properties to compare.");
+        return;
+    }
+    let html=`
+    <table class="compare-table">
+        <tr>
+            <th>Feature</th>
+            ${selected.map(p=>`<th>${p.name}</th>`).join("")}
+        </tr>`;
+    const fields=[
+        ["District","district"],
+        ["Town","town"],
+        ["Locality","locality"],
+        ["Type","type"],
+        ["Purpose","purpose"],
+        ["Area","area"],
+        ["Bedrooms","bedrooms"],
+        ["Price","price"]
+    ];
+    fields.forEach(([label,key])=>{
+        html+=`<tr><th>${label}</th>`;
+        selected.forEach(p=>{
+            html+=`<td>${p[key] || "N/A"}</td>`;
+        });
+        html+="</tr>";
+    });
+    html+="</table>";
+    document.getElementById("compareContent").innerHTML=html;
+    openModal("compareModal");
+}
+function calculateEMI(){
+    const principal=Number(document.getElementById("loanAmount").value);
+    const annual=Number(document.getElementById("interestRate").value);
+    const years=Number(document.getElementById("loanYears").value);
+    if(principal<=0 || annual<0 || years<=0){
+        alert("Enter valid loan details.");
+        return;
+    }
+    const months=years*12;
+    const rate=annual/12/100;
+    let emi;
+    if(rate===0){
+        emi=principal/months;
+    }else{
+        emi=principal*rate*Math.pow(1+rate,months)/
+            (Math.pow(1+rate,months)-1);
+    }
+    document.getElementById("emiResult").innerHTML=`
+        Monthly EMI: ₹${emi.toLocaleString("en-IN",{maximumFractionDigits:0})}
+        <br>Total Payment: ₹${(emi*months).toLocaleString("en-IN",{maximumFractionDigits:0})}
+        <br>Total Interest: ₹${(emi*months-principal).toLocaleString("en-IN",{maximumFractionDigits:0})}
+    `;
+}
+function calculateBudget(){
+    const budget=Number(document.getElementById("budget").value);
+    const down=Number(document.getElementById("downPayment").value);
+    if(budget<=0 || down<0 || down>budget){
+        alert("Please enter valid budget and down payment.");
+        return;
+    }
+    const loan=budget-down;
+    document.getElementById("budgetResult").innerHTML=`
+        Total Budget: ₹${budget.toLocaleString("en-IN")}
+        <br>Down Payment: ₹${down.toLocaleString("en-IN")}
+        <br>Estimated Loan Required: ₹${loan.toLocaleString("en-IN")}
+    `;
+}
+const bookingSelect=document.getElementById("bookingProperty");
+properties.forEach(p=>{
+    const option=document.createElement("option");
+    option.value=p.id;
+    option.textContent=p.name+" - "+p.district;
+    bookingSelect.appendChild(option);
+});
+function selectBooking(id){
+    bookingSelect.value=id;
+    closeModal("detailsModal");
+    document.getElementById("booking")
+        .scrollIntoView({behavior:"smooth"});
+}
+document.getElementById("bookingForm")
+.addEventListener("submit",function(e){
+    e.preventDefault();
+    const name=document.getElementById("customerName").value;
+    const propertyId=Number(bookingSelect.value);
+    const date=document.getElementById("visitDate").value;
+    const property=properties.find(p=>p.id===propertyId);
+    if(!property){
+        alert("Please select a property.");
+        return;
+    }
+    alert(
+        "Enquiry submitted successfully!\n\n"+
+        "Name: "+name+"\n"+
+        "Property: "+property.name+"\n"+
+        "Location: "+property.location+"\n"+
+        "Preferred Visit: "+date+
+        "\n\nDemo confirmation only. No actual booking was sent."
+    );
+    this.reset();
+});
+function openModal(id){
+    document.getElementById(id).style.display="flex";
+}
+function closeModal(id){
+    document.getElementById(id).style.display="none";
+}
+document.querySelectorAll(".modal").forEach(modal=>{
+    modal.addEventListener("click",function(e){
+        if(e.target===modal){
+            modal.style.display="none";
+        }
+    });
+});
+function toggleMenu(){
+    document.getElementById("navbar").classList.toggle("show");
+}
+document.querySelectorAll("#navbar a").forEach(link=>{
+    link.addEventListener("click",()=>{
+        document.getElementById("navbar").classList.remove("show");
+    });
+});
+document.getElementById("visitDate").min=
+    new Date().toLocaleDateString("en-CA");
+displayProperties(properties);
+</script>
+</body>
+</html>
